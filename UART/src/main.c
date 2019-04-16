@@ -18,7 +18,21 @@ int main (void) {
 		
 		char ch;
 		
-		scanf("%s",&ch);
-		printf("\n%s",&ch);
+		scanf("%c",&ch);
+		switch (ch)
+		{
+			case 'b':
+				printf("%s\n", "binary");
+				break;
+			case 'v':
+				printf("%s\n", "voltage");
+				break;
+			case 't':
+				printf("%s\n", "temperature");
+				break;
+			default:
+				printf("%s\n", "unknown");
+				break;
+		}
 	}
 }
