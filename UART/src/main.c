@@ -14,25 +14,11 @@ int main (void) {
 	stdio_serial_init(&USARTE0, &USART_SERIAL_OPTIONS);
 	ioport_set_pin_dir(UART_TXPIN, IOPORT_DIR_OUTPUT);
 	
+	unsigned int uiNumberToSend = 0;
+	
 	while(1) {
 		
-		char ch;
-		
-		scanf("%c",&ch);
-		switch (ch)
-		{
-			case 'b':
-				printf("%s\n", "binary");
-				break;
-			case 'v':
-				printf("%s\n", "voltage");
-				break;
-			case 't':
-				printf("%s\n", "temperature");
-				break;
-			default:
-				printf("%s\n", "unknown");
-				break;
-		}
+		printf("%d ", uiNumberToSend);
+		uiNumberToSend++;
 	}
 }
