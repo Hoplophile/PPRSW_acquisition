@@ -7,6 +7,8 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "GPIO", "GPIO\GPIO.cproj", "
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "UART", "UART\UART.cproj", "{C00CE18D-08CF-441B-A9BA-1B880F66AD09}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "ADC", "ADC\ADC.cproj", "{D7E261B4-2A5C-4EE9-8B4D-68249BDBF723}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -21,6 +23,10 @@ Global
 		{C00CE18D-08CF-441B-A9BA-1B880F66AD09}.Debug|AVR.Build.0 = Debug|AVR
 		{C00CE18D-08CF-441B-A9BA-1B880F66AD09}.Release|AVR.ActiveCfg = Release|AVR
 		{C00CE18D-08CF-441B-A9BA-1B880F66AD09}.Release|AVR.Build.0 = Release|AVR
+		{D7E261B4-2A5C-4EE9-8B4D-68249BDBF723}.Debug|AVR.ActiveCfg = Debug|AVR
+		{D7E261B4-2A5C-4EE9-8B4D-68249BDBF723}.Debug|AVR.Build.0 = Debug|AVR
+		{D7E261B4-2A5C-4EE9-8B4D-68249BDBF723}.Release|AVR.ActiveCfg = Release|AVR
+		{D7E261B4-2A5C-4EE9-8B4D-68249BDBF723}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
