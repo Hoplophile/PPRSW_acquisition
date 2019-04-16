@@ -18,7 +18,7 @@ int main (void) {
 		
 		char ch;
 		
-		scanf("%c",&ch);
-		printf("%c",ch);
+		scanf("%s",&ch);
+		printf("\n%s",&ch);
 	}
 }
