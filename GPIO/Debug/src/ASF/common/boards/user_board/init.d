@@ -32,6 +32,8 @@ src/ASF/common/boards/user_board/init.d \
  ../src/ASF/common/utils/interrupt.h \
  ../src/ASF/common/utils/interrupt/interrupt_avr8.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
+ ../src/ASF/common/services/ioport/ioport.h \
+ ../src/ASF/common/services/ioport/xmega/ioport.h \
  ../src/ASF/xmega/utils/status_codes.h
 
 ../src/asf.h:
@@ -99,5 +101,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../src/ASF/common/utils/interrupt/interrupt_avr8.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
+
+../src/ASF/common/services/ioport/ioport.h:
+
+../src/ASF/common/services/ioport/xmega/ioport.h:
 
 ../src/ASF/xmega/utils/status_codes.h:
