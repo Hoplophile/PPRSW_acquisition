@@ -16,6 +16,10 @@ int main (void) {
 	while (1) {
 		
 		buttonState = ioport_get_pin_level(MY_BUTTON);
-		ioport_set_pin_level(MY_LED, !buttonState);
+		
+		if(buttonState ==  false) {
+			ioport_toggle_pin_level(MY_LED);
+			delay_ms(100);
+		}
 	}
 }
