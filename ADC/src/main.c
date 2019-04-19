@@ -42,10 +42,12 @@ int main (void) {
 		
 		scanf("%c", &buffer);
 		if(buffer){
-			adc_start_conversion(&MY_ADC, MY_ADC_CH);
-			adc_wait_for_interrupt_flag(&MY_ADC, MY_ADC_CH);
-			result = adc_get_result(&MY_ADC, MY_ADC_CH);
-			
+			for(int sampleCounter = 0; sampleCounter < 16; sampleCounter++){
+				adc_start_conversion(&MY_ADC, MY_ADC_CH);
+				adc_wait_for_interrupt_flag(&MY_ADC, MY_ADC_CH);
+				result += adc_get_result(&MY_ADC, MY_ADC_CH);
+			}
+			result /= 16;
 			printf("%d\n", result);
 		}
 		
