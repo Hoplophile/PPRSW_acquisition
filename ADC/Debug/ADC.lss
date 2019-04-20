@@ -23,13 +23,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00000738  00000000  00000000  00013edc  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0002f411  00000000  00000000  00014614  2**0
+ 10 .debug_str    0002f432  00000000  00000000  00014614  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000024f0  00000000  00000000  00043a25  2**0
+ 11 .debug_loc    000024dc  00000000  00000000  00043a46  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000210  00000000  00000000  00045f18  2**3
+ 12 .debug_ranges 00000210  00000000  00000000  00045f28  2**3
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_macro  0000a575  00000000  00000000  00046128  2**0
+ 13 .debug_macro  0000a581  00000000  00000000  00046138  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2685,7 +2685,7 @@ static inline enum status_code usart_serial_putchar(usart_if usart, uint8_t c)
      df2:	08 95       	ret
 
 00000df4 <main>:
-	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, 8);
+	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, GAIN);
 	adc_write_configuration(&MY_ADC, &adc_conf);
 	adcch_write_configuration(&MY_ADC, MY_ADC_CH, &adcch_conf);
 }
@@ -2763,7 +2763,7 @@ static inline void adc_set_conversion_parameters(struct adc_config *conf,
 				ADC_CH_INPUTMODE_DIFFWGAINH_gc;
 #else
 		ch_conf->ctrl = adcch_get_gain_setting(gain) |
-     e32:	8f e0       	ldi	r24, 0x0F	; 15
+     e32:	83 e0       	ldi	r24, 0x03	; 3
      e34:	88 87       	std	Y+8, r24	; 0x08
 				ADC_CH_INPUTMODE_DIFFWGAIN_gc;
 #endif
@@ -2773,7 +2773,7 @@ static inline void adc_set_conversion_parameters(struct adc_config *conf,
 	adc_set_conversion_parameters(&adc_conf, ADC_SIGN_ON, ADC_RES_12, ADC_REF_BANDGAP);
 	adc_set_conversion_trigger(&adc_conf, ADC_TRIG_MANUAL, 1, 0);
 	adc_set_clock_rate(&adc_conf, 200000UL);
-	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, 8);
+	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, GAIN);
 	adc_write_configuration(&MY_ADC, &adc_conf);
      e3a:	be 01       	movw	r22, r28
      e3c:	6f 5f       	subi	r22, 0xFF	; 255
@@ -2919,7 +2919,7 @@ static inline void adc_clear_interrupt_flag(ADC_t *adc, uint8_t ch_mask)
 				adc_wait_for_interrupt_flag(&MY_ADC, MY_ADC_CH);
 				result += adc_get_signed_result(&MY_ADC, MY_ADC_CH);
 			}
-			result /= 1;
+			result /= SAMPLES_PER_MEASUREMENT;		// LSB = (1731 - 1574) / 317 = 0,495 mV
 			printf("%d\n", result);
      edc:	0f 2e       	mov	r0, r31
      ede:	f0 e1       	ldi	r31, 0x10	; 16
@@ -3028,7 +3028,7 @@ static inline void cpu_irq_restore(irqflags_t flags)
 				adc_wait_for_interrupt_flag(&MY_ADC, MY_ADC_CH);
 				result += adc_get_signed_result(&MY_ADC, MY_ADC_CH);
 			}
-			result /= 1;
+			result /= SAMPLES_PER_MEASUREMENT;		// LSB = (1731 - 1574) / 317 = 0,495 mV
 			printf("%d\n", result);
      f28:	2f bf       	out	0x3f, r18	; 63
      f2a:	9f 93       	push	r25
