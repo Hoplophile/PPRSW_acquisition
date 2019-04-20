@@ -5,6 +5,7 @@
 #define MY_ADC_CH ADC_CH0
 #define GAIN 1
 #define SAMPLES_PER_MEASUREMENT 1
+#define REF_VOLTAGE_mV 1100
 
 static void adc_init(void) {
 	
@@ -39,7 +40,7 @@ int main (void) {
 	
 	while(1) {
 		
-		uint16_t result = 0;
+		float result = 0;
 		char buffer;
 		
 		scanf("%c", &buffer);
@@ -50,7 +51,8 @@ int main (void) {
 				result += adc_get_signed_result(&MY_ADC, MY_ADC_CH);
 			}
 			result /= SAMPLES_PER_MEASUREMENT;		// LSB = (1731 - 1574) / 317 = 0,495 mV
-			printf("%d\n", result);
+			result = (result * REF_VOLTAGE_mV) / (GAIN * 2048);
+			printf("%f\n", result);
 		}
 		
 	}
