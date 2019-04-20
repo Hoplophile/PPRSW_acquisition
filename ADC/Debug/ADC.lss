@@ -2685,7 +2685,7 @@ static inline enum status_code usart_serial_putchar(usart_if usart, uint8_t c)
      df2:	08 95       	ret
 
 00000df4 <main>:
-	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, 4);
+	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, 8);
 	adc_write_configuration(&MY_ADC, &adc_conf);
 	adcch_write_configuration(&MY_ADC, MY_ADC_CH, &adcch_conf);
 }
@@ -2763,7 +2763,7 @@ static inline void adc_set_conversion_parameters(struct adc_config *conf,
 				ADC_CH_INPUTMODE_DIFFWGAINH_gc;
 #else
 		ch_conf->ctrl = adcch_get_gain_setting(gain) |
-     e32:	8b e0       	ldi	r24, 0x0B	; 11
+     e32:	8f e0       	ldi	r24, 0x0F	; 15
      e34:	88 87       	std	Y+8, r24	; 0x08
 				ADC_CH_INPUTMODE_DIFFWGAIN_gc;
 #endif
@@ -2773,7 +2773,7 @@ static inline void adc_set_conversion_parameters(struct adc_config *conf,
 	adc_set_conversion_parameters(&adc_conf, ADC_SIGN_ON, ADC_RES_12, ADC_REF_BANDGAP);
 	adc_set_conversion_trigger(&adc_conf, ADC_TRIG_MANUAL, 1, 0);
 	adc_set_clock_rate(&adc_conf, 200000UL);
-	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, 4);
+	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, 8);
 	adc_write_configuration(&MY_ADC, &adc_conf);
      e3a:	be 01       	movw	r22, r28
      e3c:	6f 5f       	subi	r22, 0xFF	; 255

@@ -13,7 +13,7 @@ static void adc_init(void) {
 	adc_set_conversion_parameters(&adc_conf, ADC_SIGN_ON, ADC_RES_12, ADC_REF_BANDGAP);
 	adc_set_conversion_trigger(&adc_conf, ADC_TRIG_MANUAL, 1, 0);
 	adc_set_clock_rate(&adc_conf, 200000UL);
-	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, 4);
+	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, 8);
 	adc_write_configuration(&MY_ADC, &adc_conf);
 	adcch_write_configuration(&MY_ADC, MY_ADC_CH, &adcch_conf);
 }
