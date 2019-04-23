@@ -3,9 +3,9 @@
 #define UART_TXPIN IOPORT_CREATE_PIN(PORTE, 3)
 #define MY_ADC ADCA
 #define MY_ADC_CH ADC_CH0
-#define GAIN 1
-#define SAMPLES_PER_MEASUREMENT 1
-#define REF_VOLTAGE_mV 1100
+#define GAIN 64
+#define SAMPLES_PER_MEASUREMENT 2048
+#define REF_VOLTAGE_mV 1000
 
 static void adc_init(void) {
 	
@@ -15,7 +15,7 @@ static void adc_init(void) {
 	adcch_read_configuration(&MY_ADC, MY_ADC_CH, &adcch_conf);
 	adc_set_conversion_parameters(&adc_conf, ADC_SIGN_ON, ADC_RES_12, ADC_REF_BANDGAP);
 	adc_set_conversion_trigger(&adc_conf, ADC_TRIG_MANUAL, 1, 0);
-	adc_set_clock_rate(&adc_conf, 200000UL);
+	adc_set_clock_rate(&adc_conf, 500000UL);
 	adcch_set_input(&adcch_conf, ADCCH_POS_PIN1, ADCCH_NEG_PIN5, GAIN);
 	adc_write_configuration(&MY_ADC, &adc_conf);
 	adcch_write_configuration(&MY_ADC, MY_ADC_CH, &adcch_conf);
@@ -50,10 +50,9 @@ int main (void) {
 				adc_wait_for_interrupt_flag(&MY_ADC, MY_ADC_CH);
 				result += adc_get_signed_result(&MY_ADC, MY_ADC_CH);
 			}
-			result /= SAMPLES_PER_MEASUREMENT;		// LSB = (1731 - 1574) / 317 = 0,495 mV
+			result /= SAMPLES_PER_MEASUREMENT;
 			result = (result * REF_VOLTAGE_mV) / (GAIN * 2048);
 			printf("%f\n", result);
-		}
-		
+		}		
 	}
 }
