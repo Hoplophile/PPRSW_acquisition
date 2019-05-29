@@ -4,7 +4,7 @@
 #define MY_ADC ADCA
 #define MY_ADC_CH ADC_CH0
 #define GAIN 64
-#define SAMPLES_PER_MEASUREMENT 2048
+#define SAMPLES_PER_MEASUREMENT 2048*4
 #define REF_VOLTAGE_mV 1000
 
 static void adc_init(void) {
@@ -41,6 +41,8 @@ int main (void) {
 	while(1) {
 		
 		float result = 0;
+		float mVolts = 0;
+		float grams = 0;
 		char buffer;
 		
 		scanf("%c", &buffer);
@@ -51,8 +53,10 @@ int main (void) {
 				result += adc_get_signed_result(&MY_ADC, MY_ADC_CH);
 			}
 			result /= SAMPLES_PER_MEASUREMENT;
-			result = (result * REF_VOLTAGE_mV) / (GAIN * 2048);
-			printf("%f\n", result);
+			mVolts = result * REF_VOLTAGE_mV / GAIN / 2048;
+			grams = (mVolts * 224) - 85;
+			//grams = mVolts;
+			printf("%f\n", grams);
 		}		
 	}
 }
